@@ -2,7 +2,7 @@
 
 namespace DAW_Project.Models
 {
-    public class CheckOuts
+    public class CheckOuts : BaseEntity
     {
         public Guid StudentId { get; set; }
         public Students Student { get; set; }

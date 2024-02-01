@@ -5,7 +5,7 @@ namespace DAW_Project.Models
     public class Students : BaseEntity
     {
         public string? FirstName { get; set; }
-        public string? LasrName { get; set; }
+        public string? LastName { get; set; }
         public string? IdentityNumber { get; set; }
 
         // relatie de tip One-to-One cu tabelul StudyHistory
