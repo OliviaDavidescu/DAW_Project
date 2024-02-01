@@ -1,14 +1,20 @@
 using Microsoft.EntityFrameworkCore;
 using System;
 using DAW_Project.Data;
+using DAW_Project.Helpers.Extensions;
+using DAW_Project.Helpers;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
-
+builder.Services.AddControllersWithViews();
 var connectionString = builder.Configuration.GetConnectionString("AppDbConnectionString");
 builder.Services.AddDbContext<AppDBContext>(options => options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
+builder.Services.AddRepositories();
+builder.Services.AddServices();
+builder.Services.AddHelpers();
+
 
 var app = builder.Build();
 
@@ -26,8 +32,8 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+app.UseMiddleware<JwtMiddleware>();
 
-app.UseAuthorization();
 
 app.MapRazorPages();
 
