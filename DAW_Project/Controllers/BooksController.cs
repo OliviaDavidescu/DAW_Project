@@ -10,16 +10,16 @@ namespace DAW_Project.Controllers
 {
     [Route("[controller]")]
     [ApiController]
-    public class BooksControllers : ControllerBase
+    public class BooksController : ControllerBase
     {
         private readonly AppDBContext _appContext;
 
-        public BooksControllers(AppDBContext appContext)
+        public BooksController(AppDBContext appContext)
         {
             _appContext = appContext;
         }
 
-        [Authorize(Role.Admin, Role.User)]
+        [AllowAnonymous]
         [HttpGet("books")]
         public async Task<IActionResult> GetBooks()
         {
@@ -27,7 +27,7 @@ namespace DAW_Project.Controllers
         }
 
         // CREATE
-        [Authorize(Role.Admin)]
+        //[Authorize(Role.Admin)]
         [HttpPost("book")]
         public async Task<IActionResult> Create(BookDTO bookDTO)
         {
@@ -46,7 +46,7 @@ namespace DAW_Project.Controllers
         }
 
         // UPDATE
-        [Authorize(Role.Admin)]
+        //[Authorize(Role.Admin)]
         [HttpPost("updatebook")]
         public async Task<IActionResult> Update(BookDTO bookDTO)
         {
@@ -66,11 +66,11 @@ namespace DAW_Project.Controllers
         }
 
         // DELETE
-        [Authorize(Role.Admin)]
+        //[Authorize(Role.Admin)]
         [HttpPost("deletebook")]
         public async Task<IActionResult> DeleteConfirmed(BookDTO bookDTO)
         {
-            Books bookById = await _appContext.Books.FirstOrDefaultAsync(x => x.Id == bookDTO.Id);
+            Books bookById = await _appContext.Books.FindAsync(bookDTO.Id);
             if (bookById == null)
             {
                 return BadRequest("Aceasta carte nu exista");

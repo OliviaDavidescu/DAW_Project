@@ -10,16 +10,16 @@ namespace DAW_Project.Controllers
 {
     [Route("[controller]")]
     [ApiController]
-    public class StudentsControllers : ControllerBase
+    public class StudentsController : ControllerBase
     {
         private readonly AppDBContext _appContext;
 
-        public StudentsControllers(AppDBContext appContext)
+        public StudentsController(AppDBContext appContext)
         {
             _appContext = appContext;
         }
 
-        [Authorize(Role.Admin)]
+        //[Authorize(Role.Admin)]
         [HttpGet("students")]
         public async Task<IActionResult> GetStudents()
         {
@@ -27,7 +27,7 @@ namespace DAW_Project.Controllers
         }
 
         // CREATE
-        [Authorize(Role.User)]
+        //[Authorize(Role.User)]
         [HttpPost("student")]
         public async Task<IActionResult> Create(StudentDTO studentDTO)
         {
@@ -46,7 +46,7 @@ namespace DAW_Project.Controllers
         }
 
         // UPDATE
-        [Authorize(Role.User)]
+        //[Authorize(Role.User)]
         [HttpPost("updatestudent")]
         public async Task<IActionResult> Update(StudentDTO studentDTO)
         {
@@ -66,7 +66,7 @@ namespace DAW_Project.Controllers
         }
 
         // DELETE
-        [Authorize(Role.User)]
+        //[Authorize(Role.User)]
         [HttpPost("deletestudent")]
         public async Task<IActionResult> DeleteConfirmed(StudentDTO studentDTO)
         {

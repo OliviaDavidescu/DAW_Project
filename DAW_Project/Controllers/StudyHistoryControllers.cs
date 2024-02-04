@@ -10,11 +10,11 @@ namespace DAW_Project.Controllers
 {
     [Route("[controller]")]
     [ApiController]
-    public class StudyHistoryControllers : ControllerBase
+    public class StudyHistoryController : ControllerBase
     {
         private readonly AppDBContext _appContext;
 
-        public StudyHistoryControllers(AppDBContext appContext)
+        public StudyHistoryController(AppDBContext appContext)
         {
             _appContext = appContext;
         }

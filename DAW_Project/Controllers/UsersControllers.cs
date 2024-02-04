@@ -26,14 +26,17 @@ namespace DAW_Project.Controllers
 
         [AllowAnonymous]
         [HttpPost("login")]
-        public async Task<IActionResult> Login(UserLoginDTO userLoginDto)
+        public async Task<IActionResult> Login([FromBody] UserLoginDTO userLoginDto)
         {
             var response = await _userService.Login(userLoginDto);
 
             if (response == null)
             {
+                Console.WriteLine($"Login failed for user with username: {userLoginDto.UserName}");
                 return BadRequest();
             }
+
+            Console.WriteLine($"Login successful for user with username: {userLoginDto.UserName}");
             return Ok(response);
         }
 

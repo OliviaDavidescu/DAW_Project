@@ -1,4 +1,4 @@
-﻿using DAW_Project.Helpers.JwtUtil;
+﻿﻿using DAW_Project.Helpers.JwtUtil;
 using DAW_Project.Models.DTOs;
 using DAW_Project.Models.Enums;
 using DAW_Project.Models;
@@ -27,11 +27,17 @@ namespace DAW_Project.Services.UserService
         {
             var user = await _userRepository.FindByUsername(userDTO.UserName);
 
-            if (user == null || !BCryptNet.Verify(userDTO.Password, user.Password))
+            if (user == null)
             {
-                return null; // or throw exception
+                Console.WriteLine($"User not found for username: {userDTO.UserName}");
+                return null;
             }
-            if (user == null) return null;
+
+            if (!BCryptNet.Verify(userDTO.Password, user.Password))
+            {
+                Console.WriteLine($"Invalid password for user with username: {userDTO.UserName}");
+                return null;
+            }
 
             var token = _jwtUtils.GenerateJwtToken(user);
             return new UserLoginResponse(user, token);

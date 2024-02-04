@@ -14,7 +14,7 @@ builder.Services.AddDbContext<AppDBContext>(options => options.UseMySql(connecti
 builder.Services.AddRepositories();
 builder.Services.AddServices();
 builder.Services.AddHelpers();
-
+builder.Services.Configure<AppSettings>(builder.Configuration.GetSection("AppSettings"));
 
 var app = builder.Build();
 
@@ -36,5 +36,22 @@ app.UseMiddleware<JwtMiddleware>();
 
 
 app.MapRazorPages();
+app.MapControllerRoute(
+    name: "default",
+    pattern: "{controller}/{action=Index}/{id?}");
+
+
+app.UseCors(options =>
+{
+    options.WithOrigins("http://localhost:3000") 
+           .AllowAnyHeader()
+           .AllowAnyMethod()
+           .AllowCredentials();;
+});
+
+// Map the fallback route for serving the React app
+app.MapFallbackToFile("index.html");
+
+
 
 app.Run();

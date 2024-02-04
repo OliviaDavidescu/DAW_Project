@@ -10,16 +10,16 @@ namespace DAW_Project.Controllers
 {
     [Route("[controller]")]
     [ApiController]
-    public class CheckOutsControllers : ControllerBase
+    public class CheckOutsController : ControllerBase
     {
         private readonly AppDBContext _appContext;
 
-        public CheckOutsControllers(AppDBContext appContext)
+        public CheckOutsController(AppDBContext appContext)
         {
             _appContext = appContext;
         }
 
-        [Authorize(Role.Admin)]
+        //[Authorize(Role.Admin)]
         [HttpGet("checkouts")]
         public async Task<IActionResult> GetCheckOuts()
         {
@@ -27,7 +27,7 @@ namespace DAW_Project.Controllers
         }
 
         // CREATE
-        [Authorize(Role.Admin)]
+        //[Authorize(Role.Admin)]
         [HttpPost("checkout")]
         public async Task<IActionResult> Create(CheckOutsDTO checkOutsDTO)
         {
@@ -47,7 +47,7 @@ namespace DAW_Project.Controllers
         }
 
         // UPDATE
-        [Authorize(Role.Admin)]
+        //[Authorize(Role.Admin)]
         [HttpPost("updatecheckout")]
         public async Task<IActionResult> Update(CheckOutsDTO checkOutsDTO)
         {
@@ -68,7 +68,7 @@ namespace DAW_Project.Controllers
         }
 
         // DELETE
-        [Authorize(Role.Admin)]
+        //[Authorize(Role.Admin)]
         [HttpPost("deletecheckout")]
         public async Task<IActionResult> DeleteConfirmed(CheckOutsDTO checkOutsDTO)
         {

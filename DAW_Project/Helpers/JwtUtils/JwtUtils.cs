@@ -22,7 +22,7 @@ namespace DAW_Project.Helpers.JwtUtil
             var key = Encoding.ASCII.GetBytes(_appSettings.JwtTokenSecret);
             var tokenDescriptor = new SecurityTokenDescriptor
             {
-                Subject = new ClaimsIdentity(new[] { new Claim("id", user.Id.ToString()) }),
+                Subject = new ClaimsIdentity(new[] { new Claim("id", user.Id != null ? user.Id.ToString() : string.Empty) }),
                 Expires = DateTime.UtcNow.AddDays(2),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
             };

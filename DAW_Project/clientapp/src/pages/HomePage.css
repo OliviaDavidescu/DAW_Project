@@ -1,0 +1,29 @@
+.videobg {
+    position: absolute;
+    width: 100%;
+    height: 1000px;
+    display: flex;
+    flex-direction: column;
+  }
+
+.hpcontents {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-family: Brush Script MT;
+    font-size: 2rem;
+}
+
+.lang{
+    position: relative;
+    margin-top: 3;
+    margin-right: 3;
+    display: flex;
+    flex-direction: column;
+}

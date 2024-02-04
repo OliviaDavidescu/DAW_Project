@@ -22,9 +22,17 @@ namespace DAW_Project.Repositories.UserRepository
             return await _table.GetActiveUser().ToListAsync();
         }
 
-        public async Task<User> FindByUsername(string username)
+        public async Task<User?> FindByUsername(string username)
         {
-            return (await _table.FirstOrDefaultAsync(u => u.Username.Equals(username)))!;
+            try
+            {
+                return await _table.FirstOrDefaultAsync(u => u.Username.Equals(username));
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error finding user by username: {ex.Message}");
+                return null;
+            }
         }
 
         //public  async Task<User> FindByUsernameAndPassword(string username, string password)

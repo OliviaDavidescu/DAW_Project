@@ -1,0 +1,234 @@
+// VERIFICARE CONTROLLERE
+
+// USERS
+###
+// CREARE CONT USER
+POST http://localhost:5193/users/create-user
+Content-Type: application/json
+
+{
+    "UserName": "scott",
+    "FirstName": "Scott",
+    "LastName": "Phillips",
+    "Email": "sp@gmail.com",
+    "Role": "User",
+    "Password": "aaaa"
+}
+
+###
+// CREARE CONT ADMIN
+POST http://localhost:5193/users/create-admin
+Content-Type: application/json
+
+{
+    "UserName": "may.smith",
+    "FirstName": "May",
+    "LastName": "Smith",
+    "Email": "ms@gmail.com",
+    "Role": "Admin",
+    "Password": "aaa111"
+}
+
+###
+// LOGIN
+POST http://localhost:5193/users/login
+Content-Type: application/json
+
+{
+    "UserName": "may.smith",
+    "Password": "aaa111"
+}
+
+###
+// VERIFICA CINE E IN CONT
+GET http://localhost:5193/users/check-auth-user
+
+###
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjA4ZGMyNGM3LWZlNTUtNDU2Ny04MzYyLTcyZmZkN2U0YTZkNSIsIm5iZiI6MTcwNzA0NDUyOCwiZXhwIjoxNzA3MjE3MzI4LCJpYXQiOjE3MDcwNDQ1Mjh9.sYUP6A_p9uzGb8yk3DDtN31LHwlQMRaXTwFXTCvMSOo
+GET http://localhost:5193/users/check-auth-admin
+
+
+
+// BOOKS
+
+###
+// ARATA TOATE CARTILE
+GET http://localhost:5193/books/books
+
+
+###
+// CREEAZA CARTE
+POST http://localhost:5193/books/book
+Content-Type: application/json
+
+{
+    "Name": "Marile Sperante",
+    "Author": "Charles Dickens",
+    "PublishingHouse": "Art",
+    "Section": "Literatura"
+}
+
+
+###
+// MODIFICA O CARTE
+POST http://localhost:5193/books/book
+Content-Type: application/json
+
+{
+    "Name": "Marile Sperante",
+    "Author": "Charles Dickens",
+    "PublishingHouse": "Litera",
+    "Section": "Literatura"
+}
+
+###
+// STERGE CARTE
+POST http://localhost:5193/books/deletebook
+Content-Type: application/json
+
+{
+    "Id" : "'41cee822-bca9-43f1-baf4-dd4f0ddf233e'",
+    "Name": "Marile Sperante",
+    "Author": "Charles Dickens",
+    "PublishingHouse": "Litera",
+    "Section": "Literatura"
+}
+
+
+
+// STUDENTS
+
+###
+// ARATA TOTI STUDENTII
+GET http://localhost:5193/students/students
+
+
+###
+// CREEAZA STUDENT
+POST http://localhost:5193/students/student
+Content-Type: application/json
+
+{
+    "FirstName": "Alice",
+    "LastName": "Jones",
+    "IdentityNumber": "20/2021"
+}
+
+
+###
+// MODIFICA STUDENT
+POST http://localhost:5193/students/updatestudent
+Content-Type: application/json
+
+{
+    "Id": "8cb16799-2fb3-4256-b804-792ac5d030c2",
+    "FirstName": "Kate",
+    "LastName": "Jones",
+    "IdentityNumber": "20/2021"
+}
+
+###
+// STERGE STUDENT
+POST http://localhost:5193/students/deletestudent
+Content-Type: application/json
+
+{
+    "Id": "8cb16799-2fb3-4256-b804-792ac5d030c2",
+    "FirstName": "Kate",
+    "LastName": "Jones",
+    "IdentityNumber": "20/2021"
+}
+
+
+
+// LIBRARIANS
+
+###
+// ARATA TOTI BIBLIOTECARII
+GET http://localhost:5193/librarians/librarians
+
+
+###
+// CREEAZA BIBLIOTECAR
+POST http://localhost:5193/librarians/librarian
+Content-Type: application/json
+
+{
+    "FirstName": "Frank",
+    "LastName": "Miller",
+    "Department": "Matematica",
+    "DepartmentId": "8cs26799-2fb3-4256-b804-792ac5d030c2"
+}
+
+
+###
+// MODIFICA BIBLIOTECAR
+POST http://localhost:5193/librarians/updatelibrarian
+Content-Type: application/json
+
+{
+    "Id": "8cb16799-2fb3-4256-b804-792ac5d030c2",
+    "FirstName": "Frank",
+    "LastName": "Miller",
+    "Department": "Matematica",
+    "DepartmentId": "8cs26799-2fb3-4256-b804-792ac5d030c2"
+}
+
+###
+// STERGE BIBLIOTECAR
+POST http://localhost:5193/librarians/deletelibrarian
+Content-Type: application/json
+
+{
+    "Id": "8cb16799-2fb3-4256-b804-792ac5d030c2",
+    "FirstName": "Frank",
+    "LastName": "Miller",
+    "Department": "Matematica",
+    "DepartmentId": "8cs26799-2fb3-4256-b804-792ac5d030c2"
+}
+
+
+
+// CHECKOUTS
+
+###
+// ARATA TOATE IMPRUMUTURILE
+GET http://localhost:5193/checkouts/checkouts
+
+
+###
+// CREEAZA IMPRUMUT
+POST http://localhost:5193/checkouts/checkout
+Content-Type: application/json
+
+{
+    "StudentId": "8cb16799-2fb3-4256-b804-792ac5d030c2",
+    "BookId": "41cee822-bca9-43f1-baf4-dd4f0ddf233e",
+    "from": "10-11-2023",
+    "to": "17-11-2023"
+}
+
+
+###
+// MODIFICA IMPRUMUT
+POST http://localhost:5193/checkouts/updatecheckout
+Content-Type: application/json
+
+{
+    "StudentId": "8cb16799-2fb3-4256-b804-792ac5d030c2",
+    "BookId": "41cee822-bca9-43f1-baf4-dd4f0ddf233e",
+    "from": "10-11-2023",
+    "to": "17-11-2023"
+}
+
+###
+// STERGE IMPRUMUT
+POST http://localhost:5193/checkouts/deletecheckout
+Content-Type: application/json
+
+{
+    "StudentId": "8cb16799-2fb3-4256-b804-792ac5d030c2",
+    "BookId": "41cee822-bca9-43f1-baf4-dd4f0ddf233e",
+    "from": "10-11-2023",
+    "to": "17-11-2023"
+}

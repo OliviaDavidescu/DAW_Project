@@ -1,0 +1,8 @@
+.dashboard {
+    margin-top: 0;
+    width: 100%;
+    top: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

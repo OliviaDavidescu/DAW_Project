@@ -1,0 +1,43 @@
+.sidenav {
+    display: inline-block;
+    width: 250px;
+    transition: width 650ms ease-in-out;
+    height: 1000px;
+    background-color: #4d2c3d;
+    padding-top: 28px;
+    position: relative;
+    z-index: 1;
+}
+.sidenavClosed {
+    composes: sidenav;
+    transition: width 650ms ease-in-out;
+    width: 60px;
+}
+.sideitem {
+    display: flex;
+    white-space: nowrap;
+    align-items: center;
+    padding: 20px 20px;
+    cursor: pointer;
+    color: #ab9353;
+    text-decoration: none;
+    overflow: hidden;
+}
+.linkText {
+    padding-left: 16px;
+}
+
+.sideitem:hover {
+    background-color: #61384d;
+
+}
+.menuBtn {
+    align-self: center;
+    align-self: flex-start;  
+    justify-self: flex-end;
+    color: #ab9353;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    padding-left: 20px;
+}

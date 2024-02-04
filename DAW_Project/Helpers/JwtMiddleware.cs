@@ -19,7 +19,11 @@ namespace DAW_Project.Helpers
             var userId = jwtUtil.GetUserId(token);
             if (userId != null)
             {
-                context.Items["User"] = userService.GetById(userId.Value);
+                var user = userService.GetById(userId.Value);
+                    if (user != null)
+                    {
+                        context.Items["User"] = user;
+                    }           
             }
 
             await _next(context);
