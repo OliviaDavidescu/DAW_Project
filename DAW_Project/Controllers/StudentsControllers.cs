@@ -19,15 +19,40 @@ namespace DAW_Project.Controllers
             _appContext = appContext;
         }
 
-        //[Authorize(Role.Admin)]
+        [Authorize(Role.Admin)]
         [HttpGet("students")]
         public async Task<IActionResult> GetStudents()
         {
             return Ok(await _appContext.Students.ToListAsync());
         }
 
+        [HttpGet("student/{id}")]
+        public async Task<IActionResult> GetStudentById(Guid id)
+        {
+            try
+            {
+                var student = await _appContext.Students.FindAsync(id);
+
+                if (student == null)
+                {
+                    return NotFound();
+                }
+
+                return Ok(new
+                {
+                    student.FirstName,
+                    student.LastName,
+                    student.IdentityNumber,
+                });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal Server Error: {ex.Message}");
+            }
+        }
+
         // CREATE
-        //[Authorize(Role.User)]
+        [Authorize(Role.User)]
         [HttpPost("student")]
         public async Task<IActionResult> Create(StudentDTO studentDTO)
         {
@@ -46,7 +71,7 @@ namespace DAW_Project.Controllers
         }
 
         // UPDATE
-        //[Authorize(Role.User)]
+        [Authorize(Role.User)]
         [HttpPost("updatestudent")]
         public async Task<IActionResult> Update(StudentDTO studentDTO)
         {
@@ -66,7 +91,7 @@ namespace DAW_Project.Controllers
         }
 
         // DELETE
-        //[Authorize(Role.User)]
+        [Authorize(Role.User)]
         [HttpPost("deletestudent")]
         public async Task<IActionResult> DeleteConfirmed(StudentDTO studentDTO)
         {

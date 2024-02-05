@@ -26,8 +26,33 @@ namespace DAW_Project.Controllers
             return Ok(await _appContext.Books.ToListAsync());
         }
 
+        [HttpGet("book/{id}")]
+        public async Task<IActionResult> GetBookById(Guid id)
+        {
+            try
+            {
+                var book = await _appContext.Books.FindAsync(id);
+
+                if (book == null)
+                {
+                    return NotFound();
+                }
+
+                return Ok(new
+                {
+                    book.Name,
+                    book.Author,
+                    book.PublishingHouse,
+                });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal Server Error: {ex.Message}");
+            }
+        }
+
         // CREATE
-        //[Authorize(Role.Admin)]
+        [Authorize(Role.Admin)]
         [HttpPost("book")]
         public async Task<IActionResult> Create(BookDTO bookDTO)
         {
@@ -46,7 +71,7 @@ namespace DAW_Project.Controllers
         }
 
         // UPDATE
-        //[Authorize(Role.Admin)]
+        [Authorize(Role.Admin)]
         [HttpPost("updatebook")]
         public async Task<IActionResult> Update(BookDTO bookDTO)
         {
@@ -66,7 +91,7 @@ namespace DAW_Project.Controllers
         }
 
         // DELETE
-        //[Authorize(Role.Admin)]
+        [Authorize(Role.Admin)]
         [HttpPost("deletebook")]
         public async Task<IActionResult> DeleteConfirmed(BookDTO bookDTO)
         {

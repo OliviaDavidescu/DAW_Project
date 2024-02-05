@@ -27,10 +27,9 @@ const BooksList = () => {
     
     useEffect(() => {
         if (isError) {
-          navigate("/");
+            navigate("/");
         }
     }, [isError, navigate]);
-    
 
     useEffect(() => {
         getBooks();
@@ -41,12 +40,12 @@ const BooksList = () => {
             const response = await axios.get("http://localhost:5193/books/books", {
                 withCredentials: true
             });
-            setBooks(response.data);
-            console.log(response.data);
+            setBooks(response.data.$values);
+            console.log(response.data.$values);
         } catch (error) {
-            console.error("Error fetching books:", error);
+            console.error("Error fetching students:", error);
         }
-      };
+    };
 
 
     const theme = createTheme({
@@ -112,9 +111,11 @@ const BooksList = () => {
                                             </TableRow>
                                         </TableHead>
                                         <TableBody>
-                                            {books.map((book) => (
+                                            {books && books.map((book) => (
                                                 <StyledTableRow key={book.id}>
-                                                    <StyledTableCell align="center" component="th" scope="row">{book.name}</StyledTableCell>
+                                                    <StyledTableCell align="center" component="th" scope="row">
+                                                        {book.name}
+                                                    </StyledTableCell>
                                                     <StyledTableCell align="center">{book.author}</StyledTableCell>
                                                     <StyledTableCell align="center">{book.publishingHouse}</StyledTableCell>
                                                 </StyledTableRow>

@@ -22,8 +22,8 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import Toolbar from '@mui/material/Toolbar';
 import AppBar from '@mui/material/AppBar';
 
-export const DashboardU = () => {
-    const [books, setBooks] = useState([]);
+export const DashboardA = () => {
+    const [checkouts, setCheckOuts] = useState([]);
     const navigate = useNavigate();
     const { isError } = useSelector((state) => state.auth);
     const { client } = useSelector((state) => state.auth);
@@ -38,15 +38,15 @@ export const DashboardU = () => {
 
 
     useEffect(() => {
-        getBooks();
+        getCheckOuts();
     }, []);
 
-    const getBooks = async () => {
+    const getCheckOuts = async () => {
         try {
-            const response = await axios.get("http://localhost:5193/books/books", {
+            const response = await axios.get("http://localhost:5193/checkouts/checkouts", {
                 withCredentials: true
             });
-            setBooks(response.data.$values);
+            setCheckOuts(response.data.$values);
             console.log(response.data.$values);
         } catch (error) {
             console.error("Error fetching students:", error);
@@ -103,13 +103,14 @@ export const DashboardU = () => {
               <Typography variant="h6" noWrap flexGrow={3} component="a" sx={{ mr: 2, display: { xs: 'none', md: 'flex' },
                           fontFamily: 'monospace', fontWeight: 700, letterSpacing: '.3rem', color: 'inherit',
                           textDecoration: 'none'}}>Buna, bine ai (re)venit!</Typography>
-              <Button type="submit" variant="contained" sx={{ mt: 3, mb: 2 }} onClick={() => navigate("/users/profile")}>CREEAZA-TI PROFILUL</Button>
+              <Button type="submit" variant="contained" sx={{ mt: 3, mb: 2 }} onClick={() => navigate("/checouts/create")}>ADAUGA UN CHECKOUT</Button>
+              <Button type="submit" variant="contained" sx={{ mt: 3, mb: 2 }} onClick={() => navigate("/books/create")}>ADAUGA O CARTE</Button>
             </Toolbar>
           </Container>
         </AppBar>
         <Typography variant="h6" noWrap component="a" sx={{ mr: 2, mt:2, display: { xs: 'none', md: 'flex' },
                     fontFamily: 'monospace', fontWeight: 700, letterSpacing: '.3rem', color: 'inherit',
-                    textDecoration: 'none'}}>Acestea sunt cartile disponibile in biblioteca</Typography>
+                    textDecoration: 'none'}}>Imprumuturile realizate de studenti</Typography>
         <Container component="main" maxWidth="lg" >
             <CssBaseline />
                 <Box sx={{marginTop: 8}}>
@@ -117,19 +118,27 @@ export const DashboardU = () => {
                         <Table sx={{ minWidth: 700 }} aria-label="customized table">
                             <TableHead>
                                 <TableRow>
-                                    <StyledTableCell align="center">NUME</StyledTableCell>
-                                    <StyledTableCell align="center">AUTOR</StyledTableCell>
-                                    <StyledTableCell align="center">EDITURA</StyledTableCell>
+                                    <StyledTableCell align="center">ID STUDENT</StyledTableCell>
+                                    <StyledTableCell align="center">ID CARTE</StyledTableCell>
+                                    <StyledTableCell align="center">DE LA</StyledTableCell>
+                                    <StyledTableCell align="center">PANA LA</StyledTableCell>
+                                    <StyledTableCell align="center">INFO CARTE</StyledTableCell>
+                                    <StyledTableCell align="center">INFO STUDENT</StyledTableCell>
                                 </TableRow>
                             </TableHead>
                             <TableBody>
-                                {books && books.map((book) => (
-                                    <StyledTableRow key={book.id}>
-                                        <StyledTableCell align="center" component="th" scope="row">
-                                            {book.name}
+                                {checkouts && checkouts.map((checkout) => (
+                                    <StyledTableRow key={checkout.id}>
+                                        <StyledTableCell align="center" component="th" scope="row">{checkout.studentId}</StyledTableCell>
+                                        <StyledTableCell align="center">{checkout.bookId}</StyledTableCell>
+                                        <StyledTableCell align="center">{checkout.from}</StyledTableCell>
+                                        <StyledTableCell align="center">{checkout.to}</StyledTableCell>
+                                        <StyledTableCell align="center">
+                                            <Button type="submit" variant="contained" align="center" onClick={() => navigate(`/books/book/${checkout.bookId}`)}>INFO CARTE</Button>
                                         </StyledTableCell>
-                                        <StyledTableCell align="center">{book.author}</StyledTableCell>
-                                        <StyledTableCell align="center">{book.publishingHouse}</StyledTableCell>
+                                        <StyledTableCell align="center">
+                                            <Button type="submit" variant="contained" align="center" onClick={() => navigate(`/students/student/${checkout.studentId}`)}>INFO STUDENT</Button>
+                                        </StyledTableCell>
                                     </StyledTableRow>
                                 ))}
                             </TableBody>
@@ -142,4 +151,4 @@ export const DashboardU = () => {
     );
   };
   
-  export default DashboardU;
+  export default DashboardA;

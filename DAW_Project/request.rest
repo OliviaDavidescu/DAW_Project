@@ -68,6 +68,13 @@ Content-Type: application/json
     "Section": "Literatura"
 }
 
+###
+// Gaseste carte dupa id
+GET http://localhost:5193/books/book/41cee822-bca9-43f1-baf4-dd4f0ddf233e
+
+###
+// Gaseste student dupa id
+GET http://localhost:5193/students/student/35b1ba40-2217-45d4-8b9a-8f75fa655d41
 
 ###
 // MODIFICA O CARTE
@@ -114,6 +121,16 @@ Content-Type: application/json
     "IdentityNumber": "20/2021"
 }
 
+
+###
+POST http://localhost:5193/studyhistory/history
+Content-Type: application/json
+
+{
+    "Faculty": "Facultatea de Matematica si Informatica",
+    "Year": "II",
+    "StudentId": "b00e4b03-5a27-47d7-8052-a665f27f095e"
+}
 
 ###
 // MODIFICA STUDENT
@@ -202,10 +219,10 @@ POST http://localhost:5193/checkouts/checkout
 Content-Type: application/json
 
 {
-    "StudentId": "8cb16799-2fb3-4256-b804-792ac5d030c2",
-    "BookId": "41cee822-bca9-43f1-baf4-dd4f0ddf233e",
-    "from": "10-11-2023",
-    "to": "17-11-2023"
+    "StudentId": "b00e4b03-5a27-47d7-8052-a665f27f095e",
+    "BookId": "53cf833a-abcc-4004-acab-bfa71c6a7d40",
+    "from": "2024-02-03",
+    "to": "2024-02-07"
 }
 
 
@@ -227,8 +244,10 @@ POST http://localhost:5193/checkouts/deletecheckout
 Content-Type: application/json
 
 {
-    "StudentId": "8cb16799-2fb3-4256-b804-792ac5d030c2",
-    "BookId": "41cee822-bca9-43f1-baf4-dd4f0ddf233e",
-    "from": "10-11-2023",
-    "to": "17-11-2023"
+    "StudentId": "b00e4b03-5a27-47d7-8052-a665f27f095e",
+    "BookId": "53cf833a-abcc-4004-acab-bfa71c6a7d40",
+    "from": "2024-02-03",
+    "to": "2024-02-07"
 }
+
+

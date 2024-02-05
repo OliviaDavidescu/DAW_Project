@@ -27,10 +27,9 @@ const StudentsList = () => {
     
     useEffect(() => {
         if (isError) {
-          navigate("/");
+            navigate("/");
         }
     }, [isError, navigate]);
-    
 
     useEffect(() => {
         getStudents();
@@ -41,12 +40,12 @@ const StudentsList = () => {
             const response = await axios.get("http://localhost:5193/students/students", {
                 withCredentials: true
             });
-            setStudents(response.data);
-            console.log(response.data);
+            setStudents(response.data.$values);
+            console.log(response.data.$values);
         } catch (error) {
-            console.error("Error fetching books:", error);
+            console.error("Error fetching students:", error);
         }
-      };
+    };
 
 
     const theme = createTheme({
@@ -115,9 +114,11 @@ const StudentsList = () => {
                                             </TableRow>
                                         </TableHead>
                                         <TableBody>
-                                            {students.map((student) => (
+                                            {students && students.map((student) => (
                                                 <StyledTableRow key={student.id}>
-                                                    <StyledTableCell align="center" component="th" scope="row">{student.lastName}</StyledTableCell>
+                                                    <StyledTableCell align="center" component="th" scope="row">
+                                                        {student.lastName}
+                                                    </StyledTableCell>
                                                     <StyledTableCell align="center">{student.firstName}</StyledTableCell>
                                                     <StyledTableCell align="center">{student.identityNumber}</StyledTableCell>
                                                 </StyledTableRow>

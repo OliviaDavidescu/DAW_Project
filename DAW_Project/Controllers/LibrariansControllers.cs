@@ -19,7 +19,7 @@ namespace DAW_Project.Controllers
             _appContext = appContext;
         }
 
-        //[Authorize(Role.Admin)]
+        [Authorize(Role.Admin)]
         [HttpGet("librarians")]
         public async Task<IActionResult> GetLibrarians()
         {
@@ -27,7 +27,7 @@ namespace DAW_Project.Controllers
         }
 
         // CREATE
-        //[Authorize(Role.User)]
+        [Authorize(Role.User)]
         [HttpPost("librarian")]
         public async Task<IActionResult> Create(LibrarianDTO librarianDTO)
         {
@@ -45,7 +45,7 @@ namespace DAW_Project.Controllers
         }
 
         // UPDATE
-        //[Authorize(Role.User)]
+        [Authorize(Role.User)]
         [HttpPost("updatelibrarian")]
         public async Task<IActionResult> Update(LibrarianDTO librarianDTO)
         {
@@ -64,7 +64,7 @@ namespace DAW_Project.Controllers
         }
 
         // DELETE
-        //[Authorize(Role.User)]
+        [Authorize(Role.User)]
         [HttpPost("deletelibrarian")]
         public async Task<IActionResult> DeleteConfirmed(LibrarianDTO librarianDTO)
         {
